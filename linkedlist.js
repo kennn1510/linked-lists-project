@@ -38,15 +38,19 @@ class LinkedList {
 
     return this;
   }
+
   size() {
     return this.size;
   }
+
   head() {
     return this.head;
   }
+
   tail() {
     return this.tail;
   }
+
   at(index) {
     let currentNode = this.head;
     for (let i = 0; i < index; i++) {
@@ -54,12 +58,68 @@ class LinkedList {
     }
     return currentNode;
   }
+
+  pop() {
+    let nodeBeforeLastNode = this.at(this.size - 2);
+    let poppedNode = this.tail;
+    nodeBeforeLastNode.nextNode = null;
+    this.tail = nodeBeforeLastNode;
+    this.size--;
+    return poppedNode;
+  }
+
+  contains(value) {
+    let currentNode = this.head;
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return true;
+      }
+      currentNode = currentNode.nextNode;
+    }
+    return false;
+  }
+
+  find(value) {
+    let currentNode = this.head;
+    let index = 0;
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return index;
+      }
+      currentNode = currentNode.nextNode;
+      index++;
+    }
+    return null;
+  }
+
+  toString() {
+    let currentNode = this.head;
+    let string = "";
+    while (currentNode) {
+      string += `( ${currentNode.value} ) -> `;
+      currentNode = currentNode.nextNode;
+    }
+    return string + "null";
+  }
 }
 const myLinkedList = new LinkedList();
-console.log(myLinkedList.append(0));
-console.log(myLinkedList.append(1));
-console.log(myLinkedList.append(2));
-console.log(myLinkedList.append(3));
-console.log(myLinkedList.append(4));
-console.log(myLinkedList.prepend(-1));
-console.log(myLinkedList.at(1));
+myLinkedList.append(0);
+myLinkedList.append(1);
+myLinkedList.append(2);
+myLinkedList.append(3);
+myLinkedList.append(4);
+myLinkedList.prepend(-1);
+myLinkedList.at(1);
+myLinkedList.pop();
+console.log(myLinkedList.contains(4));
+console.log(myLinkedList.toString());
+
+const list = new LinkedList();
+
+list.append("dog");
+list.append("cat");
+list.append("parrot");
+list.append("hamster");
+list.append("snake");
+list.append("turtle");
+console.log(list.toString());
